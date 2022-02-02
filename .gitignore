@@ -2,6 +2,7 @@
 /build/
 /out/
 /data/
+/target/
 
 ### STS ###
 .apt_generated
