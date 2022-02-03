@@ -10,6 +10,6 @@ import java.util.List;
 @Data
 @Builder
 public class Currencies {
-    private List<Currency> currencies;
     private LocalDateTime dateTime;
+    private List<Currency> currencies;
 }

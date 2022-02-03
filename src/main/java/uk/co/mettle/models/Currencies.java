@@ -8,7 +8,7 @@ import java.util.List;
 @Data
 @Builder
 public class Currencies {
-    private List<Currency> currencies;
     @Builder.Default
     private LocalDateTime dateTime = LocalDateTime.now();
+    private List<Currency> currencies;
 }
