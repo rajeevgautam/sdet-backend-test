@@ -1,16 +1,17 @@
 package uk.co.mettle;
 
 import io.restassured.RestAssured;
-import io.restassured.config.RestAssuredConfig;
 import io.restassured.http.ContentType;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
-import uk.co.mettle.models.Currencies;
-import uk.co.mettle.models.Currency;
+import uk.co.mettle.request.models.Currencies;
+import uk.co.mettle.request.models.Currency;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.UUID;
 
 import static io.restassured.RestAssured.given;
@@ -51,7 +52,7 @@ public class CurrencyTest {
 
     @Test
     public void addCurrency() {
-        Currency currency = new Currency(UUID.randomUUID(), "Dogecoin", "DGE");
+        Currency currency = new Currency(UUID.randomUUID(), "Dogecoin", "DGE", new BigDecimal(0.1382), new BigInteger("132670764300"));
         given()
                 .contentType(ContentType.JSON)
                 .body(currency)

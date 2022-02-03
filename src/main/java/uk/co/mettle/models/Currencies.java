@@ -1,15 +1,14 @@
 package uk.co.mettle.models;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
+@Builder
 public class Currencies {
     private List<Currency> currencies;
-
+    @Builder.Default
+    private LocalDateTime dateTime = LocalDateTime.now();
 }
