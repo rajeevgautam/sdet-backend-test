@@ -7,8 +7,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
-import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.util.UUID;
 
 @Data
@@ -19,8 +17,8 @@ public class Currency {
     private UUID id;
     private String name;
     private String code;
-    private BigDecimal price;
-    private BigInteger circulatingSupply;
+    private Double price;
+    private Double circulatingSupply;
 
     @JsonPOJOBuilder(withPrefix = "")
     @JsonIgnoreProperties(ignoreUnknown = true)

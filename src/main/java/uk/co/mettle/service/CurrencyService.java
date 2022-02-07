@@ -24,6 +24,7 @@ public class CurrencyService {
         List<CurrencyEntity> allCurrencies = currencyRepository.findAll();
         List<Currency> currencies = allCurrencies.stream()
                 .map(currencyEntity -> createCurrency(currencyEntity))
+                .sorted((e1, e2) -> e2.getMarketCap().compareTo(e1.getMarketCap()))
                 .collect(Collectors.toList());
         return Currencies.builder()
                 .currencies(currencies)
@@ -36,14 +37,7 @@ public class CurrencyService {
 
     public Currency getCurrencyById(UUID id) {
         CurrencyEntity currencyEntity = currencyRepository.findById(id).orElseThrow(() -> new CurrencyNotFoundException(id));
-
-        try {
-            int delay = 3 + (int) (Math.random() * ((6 - 3) + 1));
-            Thread.sleep(delay * 1000);
-        } catch (InterruptedException exception) {
-
-        }
-
+        simulateDelay();
         return createCurrency(currencyEntity);
     }
 
@@ -63,6 +57,15 @@ public class CurrencyService {
         BigDecimal max = BigDecimal.valueOf(59.9);
         BigDecimal randomBigDecimal = min.add(new BigDecimal(Math.random()).multiply(max.subtract(min)));
         return randomBigDecimal.setScale(2, RoundingMode.HALF_UP);
+    }
+
+    private void simulateDelay() {
+        try {
+            int delay = 3 + (int) (Math.random() * ((6 - 3) + 1));
+            Thread.sleep(delay * 1000);
+        } catch (InterruptedException exception) {
+
+        }
     }
 
 }

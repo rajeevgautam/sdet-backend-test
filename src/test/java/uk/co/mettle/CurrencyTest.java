@@ -8,11 +8,9 @@ import org.junit.jupiter.api.TestInstance;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 import uk.co.mettle.request.models.Currencies;
-import uk.co.mettle.request.models.Currency;
 
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.util.UUID;
+import java.util.HashMap;
+import java.util.Map;
 
 import static io.restassured.RestAssured.given;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -30,33 +28,38 @@ public class CurrencyTest {
     }
 
     @Test
-    public void getAllCurrencies() {
+    public void successfullyRetrieveCurrenciesInRankingOrder() {
         Currencies currencies = given()
                 .when().get("/currency/all")
                 .then().statusCode(200)
                 .extract().body().as(Currencies.class);
 
-        assertThat(currencies.getCurrencies().get(0).getCode()).isEqualTo("BTC");
         assertThat(currencies.getCurrencies().get(0).getName()).isEqualTo("Bitcoin");
-        assertThat(currencies.getCurrencies().get(1).getCode()).isEqualTo("ETH");
         assertThat(currencies.getCurrencies().get(1).getName()).isEqualTo("Ethereum");
+        assertThat(currencies.getCurrencies().get(2).getName()).isEqualTo("BNB");
+        assertThat(currencies.getCurrencies().get(3).getName()).isEqualTo("Cardano");
+        assertThat(currencies.getCurrencies().get(4).getName()).isEqualTo("Solana");
+        assertThat(currencies.getCurrencies().get(5).getName()).isEqualTo("Ripple");
     }
 
-    @Test
-    public void getACurrency() {
-        Currency currency = given()
-                .when().get("/currency/8123d9b9-b370-4b63-b2f9-81e38f02e01e")
-                .then().statusCode(200).extract().body().as(Currency.class);
-        assertThat(currency).isNotNull();
-    }
 
     @Test
-    public void addCurrency() {
-        Currency currency = new Currency(UUID.randomUUID(), "Dogecoin", "DGE", new BigDecimal(0.1382), new BigInteger("132670764300"));
+    public void successfullyAddCurrency() {
+        Map<String, Object> currencyToAdd = new HashMap();
+        currencyToAdd.put("id", "07015c51-9182-4217-824e-9f3611d04f2c");
+        currencyToAdd.put("name", "Dogecoin");
+        currencyToAdd.put("code", "DGE");
+        currencyToAdd.put("price", 123.12);
         given()
                 .contentType(ContentType.JSON)
-                .body(currency)
+                .body(currencyToAdd)
                 .when().post("/currency")
                 .then().statusCode(200);
     }
+
+    @Test
+    public void successfullyRetrieveCurrency() {
+        given().when().get("/currency/07015c51-9182-4217-824e-9f3611d04f2c");
+    }
+
 }

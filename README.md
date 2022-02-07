@@ -1,5 +1,5 @@
 # sdet-backend-test
-A technical test for sdet candidates. The test contains a springboot service with RestAssured & Junit5 tests. The objective is to fix and flakey tests, improve the quality of code and fix any bugs.
+A technical test for SDET candidates. The test contains a springboot service with RestAssured & Junit5 tests. The objective is to improve the quality of code and fix the flaky tests.
 
 ## **Currency service**
 
@@ -27,6 +27,14 @@ _GET_ - Retrieve a currency
 _POST_ - Add a currency
 ```
 /currency
+
+{
+    "id": "07015c51-9182-4217-824e-9f3611d04f2c",
+    "name": "Dogecoin",
+    "code": "DGE",
+    "price": 0.1382,
+    "circulatingSupply": 132670764300
+}
 ```
  
 
