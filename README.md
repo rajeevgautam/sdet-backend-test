@@ -1,19 +1,5 @@
 # sdet-backend-test
 A technical test for SDET candidates. The test contains a springboot service with RestAssured & Junit5 tests. The objective is to improve the quality of code and fix the flaky tests.
-
-## **Currency service**
-
-#### **Run the Application**
-```
-mvn spring-boot:run
-```
-
-#### **Run the Tests**
-```
-mvn test
-```
-
----
 #### **Acceptance Criteria**
 Given a currency is an available currency\
 When a user retrieves the currency by id\
@@ -28,6 +14,19 @@ Given a currency is not an available currency\
 When a user creates the currency with the information (id, name, code, price, circulating supply)\
 Then the currency is added\
 And the user can retrieve the currency's information that was just added
+
+---
+## **Currency service**
+
+#### **Run the Application**
+```
+mvn spring-boot:run
+```
+
+#### **Run the Tests**
+```
+mvn test
+```
 
 ---
 #### **API doc**
