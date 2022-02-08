@@ -12,6 +12,23 @@ mvn spring-boot:run
 ```
 mvn test
 ```
+
+---
+#### **Acceptance Criteria**
+Given a currency is an available currency\
+When a user retrieves the currency by id\
+Then the user receives the currency's information (id, name, code, price, circulating supply, market cap and percentage change)\
+**Note: The market cap is calculated by (price x circulating supply). The percentage change is a change on the price and will be updated on each refresh**
+
+Given multiple currencies are available\
+When a user retrieves all the currencies\
+Then the user receives the currency's information (id, name, code, price, circulating supply, market cap and percentage change)
+
+Given a currency is not an available currency\
+When a user creates the currency with the information (id, name, code, price, circulating supply)\
+Then the currency is added\
+And the user can retrieve the currency's information that was just added
+
 ---
 #### **API doc**
 

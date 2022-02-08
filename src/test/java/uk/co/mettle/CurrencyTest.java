@@ -28,7 +28,7 @@ public class CurrencyTest {
     }
 
     @Test
-    public void successfullyRetrieveCurrenciesInRankingOrder() {
+    public void successfullyRetrieveCurrenciesInOrderOfMarketCap() {
         Currencies currencies = given()
                 .when().get("/currency/all")
                 .then().statusCode(200)

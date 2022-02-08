@@ -19,7 +19,6 @@
         <lombok.version>1.18.22</lombok.version>
         <junit.version>5.8.1</junit.version>
         <jakarta.version>2.0.1</jakarta.version>
-        <wiremock.version>2.27.2</wiremock.version>
         <restAssured.version>4.5.0</restAssured.version>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
@@ -92,12 +91,6 @@
             <artifactId>lombok</artifactId>
             <version>${lombok.version}</version>
             <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.github.tomakehurst</groupId>
-            <artifactId>wiremock</artifactId>
-            <version>${wiremock.version}</version>
-            <scope>compile</scope>
         </dependency>
     </dependencies>
 </project>
