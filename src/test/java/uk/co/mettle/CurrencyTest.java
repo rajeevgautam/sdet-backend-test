@@ -8,7 +8,9 @@ import org.junit.jupiter.api.TestInstance;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 import uk.co.mettle.request.models.Currencies;
+import uk.co.mettle.request.models.Currency;
 
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,31 +24,22 @@ public class CurrencyTest {
     @LocalServerPort
     int port;
 
+    private static final String ID = "07015c51-9182-4217-824e-9f3611d04f2c";
+
     @BeforeAll
     public void beforeAll() {
         RestAssured.port = port;
     }
 
     @Test
-    public void successfullyRetrieveCurrenciesInOrderOfMarketCap() {
-        Currencies currencies = given()
-                .when().get("/currency/all")
-                .then().statusCode(200)
-                .extract().body().as(Currencies.class);
-
-        assertThat(currencies.getCurrencies().get(0).getName()).isEqualTo("Bitcoin");
-        assertThat(currencies.getCurrencies().get(1).getName()).isEqualTo("Ethereum");
-        assertThat(currencies.getCurrencies().get(2).getName()).isEqualTo("BNB");
-        assertThat(currencies.getCurrencies().get(3).getName()).isEqualTo("Cardano");
-        assertThat(currencies.getCurrencies().get(4).getName()).isEqualTo("Solana");
-        assertThat(currencies.getCurrencies().get(5).getName()).isEqualTo("Ripple");
+    public void successfullyRetrieveCurrency() {
+        given().when().get("/currency/" + ID);
     }
-
 
     @Test
     public void successfullyAddCurrency() {
         Map<String, Object> currencyToAdd = new HashMap();
-        currencyToAdd.put("id", "07015c51-9182-4217-824e-9f3611d04f2c");
+        currencyToAdd.put("id", ID);
         currencyToAdd.put("name", "Dogecoin");
         currencyToAdd.put("code", "DGE");
         currencyToAdd.put("price", 123.12);
@@ -58,8 +51,20 @@ public class CurrencyTest {
     }
 
     @Test
-    public void successfullyRetrieveCurrency() {
-        given().when().get("/currency/07015c51-9182-4217-824e-9f3611d04f2c");
+    public void successfullyRetrieveCurrenciesInOrderOfMarketCap() {
+        Currencies currencies = given()
+                .when().get("/currency/all")
+                .then().statusCode(200)
+                .extract().body().as(Currencies.class);
+        var currencyList = currencies.getCurrencies();
+        currencyList.stream().sorted(Comparator.comparing(Currency::getCode));
+
+        assertThat(currencies.getCurrencies().get(0).getName()).isEqualTo("Bitcoin");
+        assertThat(currencies.getCurrencies().get(1).getName()).isEqualTo("Ethereum");
+        assertThat(currencies.getCurrencies().get(2).getName()).isEqualTo("BNB");
+        assertThat(currencies.getCurrencies().get(3).getName()).isEqualTo("Cardano");
+        assertThat(currencies.getCurrencies().get(4).getName()).isEqualTo("Solana");
+        assertThat(currencies.getCurrencies().get(5).getName()).isEqualTo("Ripple");
     }
 
 }
