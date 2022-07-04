@@ -8,9 +8,6 @@ import org.junit.jupiter.api.TestInstance;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 import uk.co.mettle.request.models.Currencies;
-import uk.co.mettle.request.models.Currency;
-
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -50,14 +47,13 @@ public class CurrencyTest {
                 .then().statusCode(200);
     }
 
+
     @Test
     public void successfullyRetrieveCurrenciesInOrderOfMarketCap() {
         Currencies currencies = given()
                 .when().get("/currency/all")
                 .then().statusCode(200)
                 .extract().body().as(Currencies.class);
-        var currencyList = currencies.getCurrencies();
-        currencyList.stream().sorted(Comparator.comparing(Currency::getCode));
 
         assertThat(currencies.getCurrencies().get(0).getName()).isEqualTo("Bitcoin");
         assertThat(currencies.getCurrencies().get(1).getName()).isEqualTo("Ethereum");

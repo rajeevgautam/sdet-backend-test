@@ -13,7 +13,7 @@ And the user can retrieve the currency's information that was just added
 
 Given multiple currencies are available\
 When a user retrieves all the currencies\
-Then the user receives a list of currencies and the currency's information (id, name, code, price, circulating supply, market cap and percentage change)
+Then the user receives a list of currencies and the currency's information in descending order of market cap (id, name, code, price, circulating supply, market cap and percentage change)
 
 
 ---
