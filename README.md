@@ -1,5 +1,5 @@
 # sdet-backend-test
-A technical test for SDET candidates. The test contains a springboot service with RestAssured & Junit5 tests. The objective is to improve the quality of code and fix the flaky tests.
+A technical test for SDET candidates. The test contains a springboot service with RestAssured & Junit5 tests. The objective is to ensure there is enough test coverage, fix any flaky tests and fix any bugs you might come across.
 #### **Acceptance Criteria**
 Given a currency is an available currency\
 When a user retrieves the currency by id\
@@ -13,7 +13,7 @@ And the user can retrieve the currency's information that was just added
 
 Given multiple currencies are available\
 When a user retrieves all the currencies\
-Then the user receives the currency's information (id, name, code, price, circulating supply, market cap and percentage change)
+Then the user receives a list of currencies and the currency's information (id, name, code, price, circulating supply, market cap and percentage change)
 
 
 ---
